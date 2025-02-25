@@ -15,29 +15,25 @@ const HomeView = observer(() => {
       <View className="flex-1">
         <Text className="text-xl p-4">Hello World!</Text>
 
-        <Button title="Add new car" onPress={() => carStore.addNewCar()}></Button>
-
-        {
-          carStore.cars.map((car) => (
-            <Text>{ car.model }</Text>
-          ))
-        }
+        <Button title="Fetch all cars" onPress={async () => await carStore.fetchAllCars()}></Button>
+        <Button title="add cle53" onPress={async () => await carStore.addNewCar()}></Button>
 
         <SectionList
           sections={sections}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <Text>{item.model}</Text>
+            <Text>• {item.model}</Text>
           )}
           renderSectionHeader={({ section }) => (
-            <View>
-              <View className="h-6 bg-gray-100" />
-              <View className="bg-gray-100">
-                <Text className="text-xl font-bold">{section.title}</Text>
-              </View>
+            <View className="bg-gray-100">
+              <Text className="text-xl font-bold">{section.title}</Text>
             </View>
           )}
+          renderSectionFooter={() => (
+            <View className="h-6 bg-gray-100" />
+          )}
           contentContainerStyle={{ padding: 24 }}
+          stickySectionHeadersEnabled={true}
         >
         </SectionList>
       </View>
